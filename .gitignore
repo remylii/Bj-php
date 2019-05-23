@@ -1,0 +1,21 @@
+*.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+*.log
+.vscode
+.php-version
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Dependency
+node_modules
+.nyc_output
+vendor
+
+# Distribution
+public
+dist
+!dist/.gitkeep
