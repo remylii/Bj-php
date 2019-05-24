@@ -2,14 +2,14 @@
 
 namespace Bj;
 
-use Bj\CardEntity;
+use Bj\Card;
 
 class Deck
 {
     const SYMBOL = ['Spade', 'Club', 'Heart', 'Diamond'];
 
     /**
-     * @var array<CardEntity>
+     * @var array<Card>
      */
     protected $cards;
 
@@ -19,7 +19,7 @@ class Deck
     {
         foreach (static::SYMBOL as $symbol) {
             for ($i = 1; $i <= 13; $i++) {
-                $this->cards[] = new CardEntity($symbol, $i);
+                $this->cards[] = new Card($symbol, $i);
             }
         }
 

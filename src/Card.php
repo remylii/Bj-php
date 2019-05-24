@@ -1,7 +1,7 @@
 <?php
 namespace Bj;
 
-class CardEntity
+class Card
 {
     protected $symbol;
     protected $number;

@@ -6,7 +6,7 @@ use Bj\Deck;
 abstract class Player
 {
     /**
-     * @var array<CardEntity>
+     * @var array<Card>
      */
     protected $cards = [];
 
