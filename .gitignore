@@ -9,6 +9,7 @@ Icon
 
 # Coverage directory used by tools like istanbul
 coverage
+.phpunit.result.cache
 
 # Dependency
 node_modules
