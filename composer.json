@@ -1,7 +1,5 @@
 {
     "name": "mrys/bj",
-    "require": {
-    },
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +7,29 @@
             "email": "rapi.remyli@gmail.com"
         }
     ],
+    "scripts": {
+        "fix": [
+            "php-cs-fixer fix src --ansi",
+            "php-cs-fixer fix tests --ansi"
+        ],
+        "stan": [
+            "phpstan analyse -c ./phpstan.neon --ansi"
+        ],
+        "test": [
+            "phpunit -c phpunit.xml --colors=always"
+        ],
+        "ci": [
+            "@fix",
+            "@stan",
+            "@test"
+        ]
+    },
+    "require": {
+    },
     "require-dev": {
-        "phpunit/phpunit": "^8.1"
+        "phpunit/phpunit": "^8.1",
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpstan/phpstan": "^0.11.15"
     },
     "autoload": {
         "psr-4": {

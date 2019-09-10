@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="vendor/autoload.php"
+    bootstrap="./vendor/autoload.php"
     colors="true"
     processIsolation="false"
     stopOnFailure="true"
->    
+>
     <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/</directory>
+        <testsuite name="Test Suite">
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
+            <exclude></exclude>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false" />
+    </logging>
 </phpunit>

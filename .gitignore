@@ -6,6 +6,7 @@ Icon
 *.log
 .vscode
 .php-version
+.php_cs.cache
 
 # Coverage directory used by tools like istanbul
 coverage
