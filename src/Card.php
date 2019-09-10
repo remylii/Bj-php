@@ -3,6 +3,8 @@ namespace Bj;
 
 class Card
 {
+    const SYMBOLS = ['Spade', 'Club', 'Heart', 'Diamond'];
+
     protected $symbol;
     protected $number;
     protected $score;
@@ -35,12 +37,27 @@ class Card
                 $this->score = $number;
                 break;
         }
+
+        $this->validate();
     }
 
     public function __get($name)
     {
         if (property_exists($this, $name)) {
             return $this->{$name};
+        }
+
+        throw new \ReflectionException();
+    }
+
+    private function validate()
+    {
+        if (0 >= $this->number || $this->number > 13) {
+            throw new \InvalidArgumentException();
+        }
+
+        if (!in_array($this->symbol, self::SYMBOLS, true)) {
+            throw new \InvalidArgumentException();
         }
     }
 }

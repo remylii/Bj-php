@@ -35,5 +35,10 @@
         "psr-4": {
             "Bj\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
+        }
     }
 }
