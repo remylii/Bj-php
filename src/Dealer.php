@@ -22,7 +22,7 @@ class Dealer extends Player
         $str = '秘密です.';
         if ($count <= 1) {
             $card = $this->cards[$count - 1];
-            $str = sprintf(' %s の %d.', $card->symbol, $card->number);
+            $str = (string)$card->symbol . 'の' . (string)$card->number;
         }
         echo '  ドロー:' . $str . PHP_EOL;
     }

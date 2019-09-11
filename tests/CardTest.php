@@ -64,11 +64,4 @@ class CardTest extends TestCase
             [\InvalidArgumentException::class, "Star", 1],
         ];
     }
-
-    public function testMagicalGetException()
-    {
-        $this->expectException(\ReflectionException::class);
-        $card = new Card('Spade', 1);
-        $card->spade;
-    }
 }

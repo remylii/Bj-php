@@ -20,6 +20,6 @@ class User extends Player
     private function announcement()
     {
         $card = $this->cards[(count($this->cards) - 1)];
-        echo sprintf(' ドロ-: %s の %d.', $card->symbol, $card->number) . PHP_EOL;
+        echo ' ドロ-: ' . (string)$card->symbol . ' の' . (string)$card->number . PHP_EOL;
     }
 }

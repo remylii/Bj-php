@@ -33,7 +33,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Bj\\": "src/"
+            "Bj\\": "src/",
+            "Bj\\Reflection\\": "src/reflection/"
         }
     },
     "autoload-dev": {

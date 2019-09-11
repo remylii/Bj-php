@@ -5,4 +5,12 @@ parameters:
         - tests
     autoload_files:
         - %rootDir%/../../autoload.php
- 
+    excludes_analyse:
+        - %rootDir%/../../../src/reflection/*
+    ignoreErrors:
+        - '#Cannot cast Bj\\Card to string#'
+services:
+    -
+        class: \Bj\Reflection\CardPropertyClassReflectionExtension
+        tags:
+            - phpstan.broker.propertiesClassReflectionExtension
