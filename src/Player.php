@@ -10,7 +10,11 @@ abstract class Player
      */
     protected $cards = [];
 
-    abstract public function draw(Card $card);
+    public function draw(Card $card)
+    {
+        array_push($this->cards, $card);
+        return true;
+    }
 
     public function getScore()
     {
