@@ -34,11 +34,12 @@
     "autoload": {
         "psr-4": {
             "Bj\\": "src/",
-            "Bj\\Reflection\\": "src/reflection/"
+            "Bj\\Libs\\Traits\\": "src/libs/traits/"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "Bj\\Reflection\\": "src/reflection/",
             "Test\\": "tests/"
         }
     }

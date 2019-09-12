@@ -1,12 +1,15 @@
 <?php
 namespace Bj;
 
+use Bj\Libs\Traits\GameRulerInterface;
 use Bj\Deck;
 use Bj\Dealer;
 use Bj\User;
 
-class GameManager
+class GameManager implements GameRulerInterface
 {
+    use Libs\Traits\GameRulerTrait;
+
     const WIN_GAME  = 'YOU WIN!';
     const LOSE_GAME = 'YOU LOSE! なんで負けたか明日までに考えといてください';
     const DRAW_GAME = 'DRAW GAME.';
@@ -37,7 +40,7 @@ class GameManager
 
         while (true) {
             echo '現在のScore: ' . $this->user->getScore() . PHP_EOL;
-            if ($this->user->isBurst()) {
+            if ($this->isBurst($this->user->getScore())) {
                 return $this->gameset();
             }
 
@@ -55,7 +58,7 @@ class GameManager
         $this->dealer->draw($deck->drawCard());
         $this->dealer->draw($deck->drawCard());
         while (true) {
-            if ($this->dealer->isBurst()) {
+            if ($this->isBurst($this->dealer->getScore())) {
                 return $this->gameset();
             }
 
@@ -69,9 +72,9 @@ class GameManager
     public function gameset()
     {
         $str = '';
-        if ($this->user->isBurst()) {
+        if ($this->isBurst($this->user->getScore())) {
             $str = static::LOSE_GAME;
-        } elseif ($this->dealer->isBurst() || $this->user->getScore() > $this->dealer->getScore()) {
+        } elseif ($this->isBurst($this->dealer->getScore()) || $this->user->getScore() > $this->dealer->getScore()) {
             $str = static::WIN_GAME;
         } elseif ($this->user->getScore === $this->dealer->getScore()) {
             $str = static::DRAW_GAME;
