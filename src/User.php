@@ -2,16 +2,13 @@
 namespace Bj;
 
 use Bj\Player;
-use Bj\Deck;
+use Bj\Card;
 
 class User extends Player
 {
-    /**
-     * abstract function
-     */
-    public function draw(Deck $deck)
+    public function draw(Card $card)
     {
-        $this->cards[] = $deck->drawCard();
+        array_push($this->cards, $card);
 
         $this->announcement();
         return true;

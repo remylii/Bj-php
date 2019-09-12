@@ -1,7 +1,7 @@
 <?php
 namespace Bj;
 
-use Bj\Deck;
+use Bj\Card;
 
 abstract class Player
 {
@@ -10,7 +10,7 @@ abstract class Player
      */
     protected $cards = [];
 
-    abstract public function draw(Deck $deck);
+    abstract public function draw(Card $card);
 
     public function getScore()
     {

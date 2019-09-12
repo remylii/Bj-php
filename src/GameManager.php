@@ -24,15 +24,16 @@ class GameManager
 
     public function __construct()
     {
-        $this->deck = new Deck();
         $this->dealer = new Dealer();
         $this->user = new User;
     }
 
     public function start()
     {
-        $this->user->draw($this->deck);
-        $this->user->draw($this->deck);
+        $deck = new Deck();
+
+        $this->user->draw($deck->drawCard());
+        $this->user->draw($deck->drawCard());
 
         while (true) {
             echo '現在のScore: ' . $this->user->getScore() . PHP_EOL;
@@ -47,18 +48,18 @@ class GameManager
                 break;
             }
 
-            $this->user->draw($this->deck);
+            $this->user->draw($deck->drawCard());
         }
 
         echo 'Dealerのターン' . PHP_EOL;
-        $this->dealer->draw($this->deck);
-        $this->dealer->draw($this->deck);
+        $this->dealer->draw($deck->drawCard());
+        $this->dealer->draw($deck->drawCard());
         while (true) {
             if ($this->dealer->isBurst()) {
                 return $this->gameset();
             }
 
-            $this->dealer->draw($this->deck);
+            $this->dealer->draw($deck->drawCard());
         }
 
         echo sprintf("%d : %d", $this->user->getScore(), $this->dealer->getScore()) . PHP_EOL;
