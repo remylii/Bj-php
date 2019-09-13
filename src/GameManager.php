@@ -41,7 +41,7 @@ class GameManager implements GameRulerInterface
         while (true) {
             echo '現在のScore: ' . $this->user->getScore() . PHP_EOL;
             if ($this->isBurst($this->user->getScore())) {
-                return $this->gameset();
+                return $this->gameResult();
             }
 
             echo 'Please enter `y or Q` > ';
@@ -59,32 +59,21 @@ class GameManager implements GameRulerInterface
         $this->dealer->draw($deck->drawCard());
         while (true) {
             if ($this->isBurst($this->dealer->getScore())) {
-                return $this->gameset();
+                return $this->gameResult();
             }
 
             $this->dealer->draw($deck->drawCard());
+
+            if ($this->dealer->getScore() >= 18) {
+                break;
+            }
         }
 
-        echo sprintf("%d : %d", $this->user->getScore(), $this->dealer->getScore()) . PHP_EOL;
-        return;
+        return $this->gameResult();
     }
 
-    public function gameset()
+    public function gameResult(): void
     {
-        $str = '';
-        if ($this->isBurst($this->user->getScore())) {
-            $str = static::LOSE_GAME;
-        } elseif ($this->isBurst($this->dealer->getScore()) || $this->user->getScore() > $this->dealer->getScore()) {
-            $str = static::WIN_GAME;
-        } elseif ($this->user->getScore === $this->dealer->getScore()) {
-            $str = static::DRAW_GAME;
-        } else {
-            $str = static::LOSE_GAME;
-        }
-
-        echo PHP_EOL . '>>>  GAME RESULT  <<<' . PHP_EOL;
-        echo $str . PHP_EOL;
-        echo sprintf("%d : %d", $this->user->getScore(), $this->dealer->getScore()) . PHP_EOL;
-        return;
+        echo "結果: " . $this->user->getScore() . ', ' . $this->dealer->getScore() . PHP_EOL;
     }
 }
