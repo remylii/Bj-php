@@ -47,6 +47,41 @@ class CardTest extends TestCase
     }
 
     /**
+     * @dataProvider infoProvider
+     */
+    public function testInfo($expect, $params)
+    {
+        $card = new Card($params[0], $params[1]);
+        $this->assertSame($expect, $card->info());
+    }
+
+    public function infoProvider(): array
+    {
+        return [
+            ["Spadeの1",    ["Spade",   1]],
+            ["Spadeの10",   ["Spade",   10]],
+            ["Spadeの11",   ["Spade",   11]],
+            ["Spadeの12",   ["Spade",   12]],
+            ["Spadeの13",   ["Spade",   13]],
+            ["Clubの1",     ["Club",    1]],
+            ["Clubの10",    ["Club",    10]],
+            ["Clubの11",    ["Club",    11]],
+            ["Clubの12",    ["Club",    12]],
+            ["Clubの13",    ["Club",    13]],
+            ["Heartの1",    ["Heart",   1]],
+            ["Heartの10",   ["Heart",   10]],
+            ["Heartの11",   ["Heart",   11]],
+            ["Heartの12",   ["Heart",   12]],
+            ["Heartの13",   ["Heart",   13]],
+            ["Diamondの1",  ["Diamond", 1]],
+            ["Diamondの10", ["Diamond", 10]],
+            ["Diamondの11", ["Diamond", 11]],
+            ["Diamondの12", ["Diamond", 12]],
+            ["Diamondの13", ["Diamond", 13]],
+        ];
+    }
+
+    /**
      * @dataProvider constructExcpetionProvider
      */
     public function testConstructException($expect_exception, $symbol, $number)

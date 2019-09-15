@@ -50,6 +50,11 @@ class Card
         throw new \ReflectionException();
     }
 
+    public function info(): string
+    {
+        return $this->symbol . 'の' . $this->number;
+    }
+
     private function validate()
     {
         if (0 >= $this->number || $this->number > 13) {
