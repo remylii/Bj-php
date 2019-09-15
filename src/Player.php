@@ -25,8 +25,12 @@ abstract class Player
         return $score;
     }
 
-    public function isBurst()
+    public function showCard(): string
     {
-        return ($this->getScore() > 21);
+        $arr = [];
+        foreach ($this->cards as $card) {
+            array_push($arr, $card->info());
+        }
+        return (count($arr) > 0) ? implode(', ', $arr) : '';
     }
 }

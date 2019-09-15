@@ -37,4 +37,41 @@ class PlayerTest extends TestCase
             [31, [["Spade", 1], ["Club", 10], ["Heart", 11], ["Diamond", 12]]]
         ];
     }
+
+    /**
+     * @dataProvider showCardProvider
+     */
+    public function testShowCard($expect, $args)
+    {
+        foreach ($args as $arg) {
+            $card = new Card($arg[0], $arg[1]);
+            $this->player->draw($card);
+        }
+
+        $this->assertSame($expect, $this->player->showCard());
+    }
+
+    public function showCardProvider(): array
+    {
+        return [
+            "カード1枚" => [
+                "Spadeの1", [
+                    ["Spade", 1],
+                ],
+            ],
+            "カード2枚" => [
+                "Spadeの13, Heartの2", [
+                    ["Spade", 13],
+                    ["Heart", 2]
+                ],
+            ],
+            "カード3枚" => [
+                "Diamondの9, Diamondの10, Diamondの11", [
+                    ["Diamond", 9],
+                    ["Diamond", 10],
+                    ["Diamond", 11],
+                ],
+            ]
+        ];
+    }
 }
