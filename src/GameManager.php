@@ -64,7 +64,7 @@ class GameManager implements GameRulerInterface
 
             $this->dealer->draw($deck->drawCard());
 
-            if ($this->dealer->getScore() >= 18) {
+            if ($this->isDealerStopScore($this->dealer->getScore())) {
                 break;
             }
         }
