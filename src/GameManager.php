@@ -37,14 +37,15 @@ class GameManager implements GameRulerInterface
 
         $this->user->draw($deck->drawCard());
         $this->user->draw($deck->drawCard());
+        echo $this->user->showCard() . PHP_EOL;
 
         while (true) {
-            echo '現在のScore: ' . $this->user->getScore() . PHP_EOL;
             if ($this->isBurst($this->user->getScore())) {
-                return $this->gameResult();
+                $this->gameResult();
+                return;
             }
 
-            echo 'Please enter `y or Q` > ';
+            echo 'ドローの場合は何かしらを、stay宣言の場合は `Q` を入力してください > ';
             $stdin = trim(fgets(STDIN));
             if ($stdin === 'Q' || $stdin === 'q') {
                 echo 'Playerはstayを宣言' . PHP_EOL;
@@ -52,6 +53,7 @@ class GameManager implements GameRulerInterface
             }
 
             $this->user->draw($deck->drawCard());
+            echo $this->user->showCard() . PHP_EOL;
         }
 
         echo 'Dealerのターン' . PHP_EOL;
@@ -59,7 +61,8 @@ class GameManager implements GameRulerInterface
         $this->dealer->draw($deck->drawCard());
         while (true) {
             if ($this->isBurst($this->dealer->getScore())) {
-                return $this->gameResult();
+                $this->gameResult();
+                return;
             }
 
             $this->dealer->draw($deck->drawCard());
@@ -69,7 +72,8 @@ class GameManager implements GameRulerInterface
             }
         }
 
-        return $this->gameResult();
+        $this->gameResult();
+        return;
     }
 
     public function gameResult(): void
