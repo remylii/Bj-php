@@ -24,6 +24,18 @@ class GameManagerTest extends TestCase
         $gm->gameResult();
         $output_contents = \ob_get_clean();
 
-        $this->assertSame("結果: 0, 0\n", $output_contents);
+        $this->assertSame($gm::DRAW_GAME . PHP_EOL . "結果: 0, 0\n", $output_contents);
+    }
+
+    public function testAnnounce()
+    {
+        $expect = 'ああああaaaaa';
+        $gm = new GameManager();
+        \ob_start();
+
+        $gm->announce($expect);
+        $output_contents = \ob_get_clean();
+
+        $this->assertSame($expect, $output_contents);
     }
 }

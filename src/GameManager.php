@@ -37,7 +37,7 @@ class GameManager implements GameRulerInterface
 
         $this->user->draw($deck->drawCard());
         $this->user->draw($deck->drawCard());
-        echo $this->user->showCard() . PHP_EOL;
+        $this->announce($this->user->showCard() . PHP_EOL);
 
         while (true) {
             if ($this->isBurst($this->user->getScore())) {
@@ -45,20 +45,22 @@ class GameManager implements GameRulerInterface
                 return;
             }
 
-            echo 'ドローの場合は何かしらを、stay宣言の場合は `Q` を入力してください > ';
+            $this->announce('ドローの場合は何かしらを、stay宣言の場合は `Q` を入力してください > ');
             $stdin = trim(fgets(STDIN));
             if ($stdin === 'Q' || $stdin === 'q') {
-                echo 'Playerはstayを宣言' . PHP_EOL;
+                $this->announce('Playerはstayを宣言' . PHP_EOL);
                 break;
             }
 
             $this->user->draw($deck->drawCard());
-            echo $this->user->showCard() . PHP_EOL;
+            $this->announce($this->user->showCard() . PHP_EOL);
         }
 
-        echo 'Dealerのターン' . PHP_EOL;
+        $this->announce('Dealerのターン' . PHP_EOL);
         $this->dealer->draw($deck->drawCard());
+        $this->announce($this->dealer->showCard() . PHP_EOL);
         $this->dealer->draw($deck->drawCard());
+
         while (true) {
             if ($this->isBurst($this->dealer->getScore())) {
                 $this->gameResult();
@@ -78,6 +80,22 @@ class GameManager implements GameRulerInterface
 
     public function gameResult(): void
     {
-        echo "結果: " . $this->user->getScore() . ', ' . $this->dealer->getScore() . PHP_EOL;
+        $player_score = $this->user->getScore();
+        $dealer_score = $this->dealer->getScore();
+        $res = $this->whoIsWinner($player_score, $dealer_score);
+        $prefix = '';
+        if ($res === self::PLAYER) {
+            $prefix = self::WIN_GAME;
+        } elseif ($res === self::DEALER) {
+            $prefix = self::LOSE_GAME;
+        } else {
+            $prefix = self::DRAW_GAME;
+        }
+        $this->announce($prefix . PHP_EOL . "結果: " . $player_score . ', ' . $dealer_score . PHP_EOL);
+    }
+
+    public function announce(string $str): void
+    {
+        echo $str;
     }
 }
